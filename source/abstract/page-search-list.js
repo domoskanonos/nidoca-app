@@ -9,7 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const frontend_basis_1 = require("@domoskanonos/frontend-basis");
 const lit_element_1 = require("lit-element");
 const nidoca_core_1 = require("@domoskanonos/nidoca-core");
-class NidocaAbstractPageSearchList extends nidoca_core_1.NidocaTemplate {
+const index_1 = require("@domoskanonos/nidoca-core/source/index");
+class NidocaAbstractPageSearchList extends lit_element_1.LitElement {
     constructor(searchList) {
         super();
         this.searchList = searchList;
@@ -19,65 +20,65 @@ class NidocaAbstractPageSearchList extends nidoca_core_1.NidocaTemplate {
         this.showDeleteDialog = false;
         this.navigationTitle = this.getNavigationTitle();
     }
-    getTopContent() {
+    render() {
         return lit_element_1.html `
-      <nidoca-top-app-bar>
-        <nidoca-icon
-          slot="leftComponents"
-          icon="arrow_back"
-          clickable="true"
-          title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("select_items")}"
-          @nidoca-event-icon-clicked="${() => frontend_basis_1.RouterService.getUniqueInstance().back()}"
-        ></nidoca-icon>
-        <nidoca-typography
-          slot="leftComponents"
-          .typographyType="${nidoca_core_1.TypographyType.BODY1}"
-          >${this.navigationTitle}</nidoca-typography
-        >
-        <nidoca-visible
-          slot="rightComponents"
-          .visibleType="${this.resultSize > 1
-            ? nidoca_core_1.VisibleType.NORMAL
-            : nidoca_core_1.VisibleType.HIDE}"
+      <nidoca-border .borderProperties="${[index_1.BorderProperties.BOTTOM]}">
+        <nidoca-top-app-bar
+          style="color: var(--app-color-primary);background-color: var(--app-color-primary-background);"
         >
           <nidoca-icon
-            icon="${this.selectionMode ? "close" : "playlist_add_check"}"
+            slot="leftComponents"
+            icon="arrow_back"
             clickable="true"
             title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("select_items")}"
-            @nidoca-event-icon-clicked="${() => this.switchSelectionMode()}"
+            @nidoca-event-icon-clicked="${() => frontend_basis_1.RouterService.getUniqueInstance().back()}"
           ></nidoca-icon>
-        </nidoca-visible>
-        <nidoca-visible
-          slot="rightComponents"
-          .visibleType="${this.selectionMode
+          <nidoca-typography
+            slot="leftComponents"
+            .typographyType="${nidoca_core_1.TypographyType.BODY1}"
+            >${this.navigationTitle}</nidoca-typography
+          >
+          <nidoca-visible
+            slot="rightComponents"
+            .visibleType="${this.resultSize > 1
             ? nidoca_core_1.VisibleType.NORMAL
             : nidoca_core_1.VisibleType.HIDE}"
-        >
-          <nidoca-icon
-            icon="delete"
-            clickable="true"
-            title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("delete")}"
-            @nidoca-event-icon-clicked="${() => (this.showDeleteDialog = true)}"
-          ></nidoca-icon
-        ></nidoca-visible>
-        <nidoca-visible
-          slot="rightComponents"
-          .visibleType="${this.selectionMode
+          >
+            <nidoca-icon
+              icon="${this.selectionMode ? "close" : "playlist_add_check"}"
+              clickable="true"
+              title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("select_items")}"
+              @nidoca-event-icon-clicked="${() => this.switchSelectionMode()}"
+            ></nidoca-icon>
+          </nidoca-visible>
+          <nidoca-visible
+            slot="rightComponents"
+            .visibleType="${this.selectionMode
+            ? nidoca_core_1.VisibleType.NORMAL
+            : nidoca_core_1.VisibleType.HIDE}"
+          >
+            <nidoca-icon
+              icon="delete"
+              clickable="true"
+              title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("delete")}"
+              @nidoca-event-icon-clicked="${() => (this.showDeleteDialog = true)}"
+            ></nidoca-icon
+          ></nidoca-visible>
+          <nidoca-visible
+            slot="rightComponents"
+            .visibleType="${this.selectionMode
             ? nidoca_core_1.VisibleType.HIDE
             : nidoca_core_1.VisibleType.NORMAL}"
-        >
-          <nidoca-icon
-            icon="add"
-            clickable="true"
-            title="${this.getAddTitle()}"
-            @nidoca-event-icon-clicked="${() => frontend_basis_1.RouterService.getUniqueInstance().navigate(this.getEditPageUrl())}"
-          ></nidoca-icon
-        ></nidoca-visible>
-      </nidoca-top-app-bar>
-    `;
-    }
-    getMainComponent() {
-        return lit_element_1.html `
+          >
+            <nidoca-icon
+              icon="add"
+              clickable="true"
+              title="${this.getAddTitle()}"
+              @nidoca-event-icon-clicked="${() => frontend_basis_1.RouterService.getUniqueInstance().navigate(this.getEditPageUrl())}"
+            ></nidoca-icon
+          ></nidoca-visible>
+        </nidoca-top-app-bar>
+      </nidoca-border>
       <span>
         <span
           @nidoca-event-search-list-delete-items-successful="${() => (this.showDeleteDialog = false)}"
