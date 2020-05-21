@@ -2,7 +2,7 @@ import { html, LitElement, property, query, TemplateResult } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { guard } from 'lit-html/directives/guard';
 import { RouterService, BasicService } from '@domoskanonos/frontend-basis';
-import { KeyValueData, NidocaList, NidocaIcon, NidocaListItem } from '@domoskanonos/nidoca-core';
+import { KeyValueData, NidocaList, NidocaIcon } from '@domoskanonos/nidoca-core';
 
 export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
    constructor() {
