@@ -9,6 +9,9 @@ and [litelement](https://lit-element.polymer-project.org/).
 
 visit showcase page: [nidoca.de](http://nidoca.de)
 
+this is an extension of nidoca-core.
+this project contains components an pages for mobile apps.
+
 ## Installation:
 
 Installation is simple with [npm](https://www.npmjs.com/package/@domoskanonos/nidoca-app):
