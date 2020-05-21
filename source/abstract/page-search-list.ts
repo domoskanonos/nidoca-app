@@ -1,5 +1,5 @@
 import { I18nService, RouterService } from "@domoskanonos/frontend-basis";
-import { html, property, TemplateResult } from "lit-element";
+import { html, LitElement, property, TemplateResult } from "lit-element";
 
 import {
   VisibleType,
@@ -7,8 +7,9 @@ import {
   TypographyType
 } from "@domoskanonos/nidoca-core";
 import { NidocaAbstractComponentSearchList } from "./component-search-list";
+import { BorderProperties } from "@domoskanonos/nidoca-core/source/index";
 
-export abstract class NidocaAbstractPageSearchList extends NidocaTemplate {
+export abstract class NidocaAbstractPageSearchList extends LitElement {
   @property()
   navigationTitle: string = "";
 
@@ -34,70 +35,72 @@ export abstract class NidocaAbstractPageSearchList extends NidocaTemplate {
 
   abstract getEditPageUrl(): string;
 
-  getTopContent(): TemplateResult {
+  render() {
     return html`
-      <nidoca-top-app-bar>
-        <nidoca-icon
-          slot="leftComponents"
-          icon="arrow_back"
-          clickable="true"
-          title="${I18nService.getUniqueInstance().getValue("select_items")}"
-          @nidoca-event-icon-clicked="${() =>
-            RouterService.getUniqueInstance().back()}"
-        ></nidoca-icon>
-        <nidoca-typography
-          slot="leftComponents"
-          .typographyType="${TypographyType.BODY1}"
-          >${this.navigationTitle}</nidoca-typography
-        >
-        <nidoca-visible
-          slot="rightComponents"
-          .visibleType="${this.resultSize > 1
-            ? VisibleType.NORMAL
-            : VisibleType.HIDE}"
+      <nidoca-border .borderProperties="${[BorderProperties.BOTTOM]}">
+        <nidoca-top-app-bar
+          style="color: var(--app-color-primary);background-color: var(--app-color-primary-background);"
         >
           <nidoca-icon
-            icon="${this.selectionMode ? "close" : "playlist_add_check"}"
+            slot="leftComponents"
+            icon="arrow_back"
             clickable="true"
             title="${I18nService.getUniqueInstance().getValue("select_items")}"
-            @nidoca-event-icon-clicked="${() => this.switchSelectionMode()}"
-          ></nidoca-icon>
-        </nidoca-visible>
-        <nidoca-visible
-          slot="rightComponents"
-          .visibleType="${this.selectionMode
-            ? VisibleType.NORMAL
-            : VisibleType.HIDE}"
-        >
-          <nidoca-icon
-            icon="delete"
-            clickable="true"
-            title="${I18nService.getUniqueInstance().getValue("delete")}"
-            @nidoca-event-icon-clicked="${() => (this.showDeleteDialog = true)}"
-          ></nidoca-icon
-        ></nidoca-visible>
-        <nidoca-visible
-          slot="rightComponents"
-          .visibleType="${this.selectionMode
-            ? VisibleType.HIDE
-            : VisibleType.NORMAL}"
-        >
-          <nidoca-icon
-            icon="add"
-            clickable="true"
-            title="${this.getAddTitle()}"
             @nidoca-event-icon-clicked="${() =>
-              RouterService.getUniqueInstance().navigate(
-                this.getEditPageUrl()
+              RouterService.getUniqueInstance().back()}"
+          ></nidoca-icon>
+          <nidoca-typography
+            slot="leftComponents"
+            .typographyType="${TypographyType.BODY1}"
+            >${this.navigationTitle}</nidoca-typography
+          >
+          <nidoca-visible
+            slot="rightComponents"
+            .visibleType="${this.resultSize > 1
+              ? VisibleType.NORMAL
+              : VisibleType.HIDE}"
+          >
+            <nidoca-icon
+              icon="${this.selectionMode ? "close" : "playlist_add_check"}"
+              clickable="true"
+              title="${I18nService.getUniqueInstance().getValue(
+                "select_items"
               )}"
-          ></nidoca-icon
-        ></nidoca-visible>
-      </nidoca-top-app-bar>
-    `;
-  }
-
-  getMainComponent(): TemplateResult {
-    return html`
+              @nidoca-event-icon-clicked="${() => this.switchSelectionMode()}"
+            ></nidoca-icon>
+          </nidoca-visible>
+          <nidoca-visible
+            slot="rightComponents"
+            .visibleType="${this.selectionMode
+              ? VisibleType.NORMAL
+              : VisibleType.HIDE}"
+          >
+            <nidoca-icon
+              icon="delete"
+              clickable="true"
+              title="${I18nService.getUniqueInstance().getValue("delete")}"
+              @nidoca-event-icon-clicked="${() =>
+                (this.showDeleteDialog = true)}"
+            ></nidoca-icon
+          ></nidoca-visible>
+          <nidoca-visible
+            slot="rightComponents"
+            .visibleType="${this.selectionMode
+              ? VisibleType.HIDE
+              : VisibleType.NORMAL}"
+          >
+            <nidoca-icon
+              icon="add"
+              clickable="true"
+              title="${this.getAddTitle()}"
+              @nidoca-event-icon-clicked="${() =>
+                RouterService.getUniqueInstance().navigate(
+                  this.getEditPageUrl()
+                )}"
+            ></nidoca-icon
+          ></nidoca-visible>
+        </nidoca-top-app-bar>
+      </nidoca-border>
       <span>
         <span
           @nidoca-event-search-list-delete-items-successful="${() =>
