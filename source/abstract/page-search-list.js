@@ -9,24 +9,71 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const frontend_basis_1 = require("@domoskanonos/frontend-basis");
 const lit_element_1 = require("lit-element");
 const nidoca_core_1 = require("@domoskanonos/nidoca-core");
-const template_app_1 = require("./template-app");
-class NidocaAbstractPageSearchList extends template_app_1.NidocaAppTemplate {
+class NidocaAbstractPageSearchList extends nidoca_core_1.NidocaTemplate {
     constructor(searchList) {
         super();
         this.searchList = searchList;
+        this.navigationTitle = "";
         this.resultSize = 0;
         this.selectionMode = false;
         this.showDeleteDialog = false;
         this.navigationTitle = this.getNavigationTitle();
     }
-    getLeftNavigationContent() {
+    getTopContent() {
         return lit_element_1.html `
-      <nidoca-icon
-        icon="arrow_back"
-        clickable="true"
-        title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("select_items")}"
-        @nidoca-event-icon-clicked="${() => frontend_basis_1.RouterService.getUniqueInstance().back()}"
-      ></nidoca-icon>
+      <nidoca-top-app-bar>
+        <nidoca-icon
+          slot="leftComponents"
+          icon="arrow_back"
+          clickable="true"
+          title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("select_items")}"
+          @nidoca-event-icon-clicked="${() => frontend_basis_1.RouterService.getUniqueInstance().back()}"
+        ></nidoca-icon>
+        <nidoca-typography
+          slot="leftComponents"
+          .typographyType="${nidoca_core_1.TypographyType.BODY1}"
+          >${this.navigationTitle}</nidoca-typography
+        >
+        <nidoca-visible
+          slot="rightComponents"
+          .visibleType="${this.resultSize > 1
+            ? nidoca_core_1.VisibleType.NORMAL
+            : nidoca_core_1.VisibleType.HIDE}"
+        >
+          <nidoca-icon
+            icon="${this.selectionMode ? "close" : "playlist_add_check"}"
+            clickable="true"
+            title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("select_items")}"
+            @nidoca-event-icon-clicked="${() => this.switchSelectionMode()}"
+          ></nidoca-icon>
+        </nidoca-visible>
+        <nidoca-visible
+          slot="rightComponents"
+          .visibleType="${this.selectionMode
+            ? nidoca_core_1.VisibleType.NORMAL
+            : nidoca_core_1.VisibleType.HIDE}"
+        >
+          <nidoca-icon
+            icon="delete"
+            clickable="true"
+            title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("delete")}"
+            @nidoca-event-icon-clicked="${() => (this.showDeleteDialog = true)}"
+          ></nidoca-icon
+        ></nidoca-visible>
+        <nidoca-visible
+          slot="rightComponents"
+          .visibleType="${this.selectionMode
+            ? nidoca_core_1.VisibleType.HIDE
+            : nidoca_core_1.VisibleType.NORMAL}"
+        >
+          <nidoca-icon
+            icon="add"
+            clickable="true"
+            title="${this.getAddTitle()}"
+            @nidoca-event-icon-clicked="${() => frontend_basis_1.RouterService.getUniqueInstance().navigate(this.getEditPageUrl())}"
+          ></nidoca-icon
+        ></nidoca-visible>
+      </nidoca-top-app-bar>
     `;
     }
     getMainComponent() {
@@ -49,49 +96,6 @@ class NidocaAbstractPageSearchList extends template_app_1.NidocaAppTemplate {
       </span>
     `;
     }
-    getTopRightComponent() {
-        return lit_element_1.html `
-      <nidoca-visible
-        slot="rightComponents"
-        .visibleType="${this.resultSize > 1
-            ? nidoca_core_1.VisibleType.NORMAL
-            : nidoca_core_1.VisibleType.HIDE}"
-      >
-        <nidoca-icon
-          icon="${this.selectionMode ? "close" : "playlist_add_check"}"
-          clickable="true"
-          title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("select_items")}"
-          @nidoca-event-icon-clicked="${() => this.switchSelectionMode()}"
-        ></nidoca-icon>
-      </nidoca-visible>
-      <nidoca-visible
-        slot="rightComponents"
-        .visibleType="${this.selectionMode
-            ? nidoca_core_1.VisibleType.NORMAL
-            : nidoca_core_1.VisibleType.HIDE}"
-      >
-        <nidoca-icon
-          icon="delete"
-          clickable="true"
-          title="${frontend_basis_1.I18nService.getUniqueInstance().getValue("delete")}"
-          @nidoca-event-icon-clicked="${() => (this.showDeleteDialog = true)}"
-        ></nidoca-icon
-      ></nidoca-visible>
-      <nidoca-visible
-        slot="rightComponents"
-        .visibleType="${this.selectionMode
-            ? nidoca_core_1.VisibleType.HIDE
-            : nidoca_core_1.VisibleType.NORMAL}"
-      >
-        <nidoca-icon
-          icon="add"
-          clickable="true"
-          title="${this.getAddTitle()}"
-          @nidoca-event-icon-clicked="${() => frontend_basis_1.RouterService.getUniqueInstance().navigate(this.getEditPageUrl())}"
-        ></nidoca-icon
-      ></nidoca-visible>
-    `;
-    }
     switchSelectionMode() {
         this.searchList.switchSelectionMode();
         let value = Boolean(this.searchList.listComponent != null &&
@@ -108,6 +112,9 @@ class NidocaAbstractPageSearchList extends template_app_1.NidocaAppTemplate {
         this.searchList.deleteSelection();
     }
 }
+__decorate([
+    lit_element_1.property()
+], NidocaAbstractPageSearchList.prototype, "navigationTitle", void 0);
 __decorate([
     lit_element_1.property()
 ], NidocaAbstractPageSearchList.prototype, "resultSize", void 0);
