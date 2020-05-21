@@ -105,3 +105,4 @@ dist
 /.idea/
 *.js
 *.js.map
+/package-lock.json
