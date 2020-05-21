@@ -1,10 +1,10 @@
 import { customElement, html, LitElement, property } from 'lit-element';
-import { I18nService, LanguageKey } from '@domoskanonos/frontend-basis';
+import { I18nService } from '@domoskanonos/frontend-basis';
 import { BasicService } from '@domoskanonos/frontend-basis';
 import { KeyValueData, InputfieldType } from '@domoskanonos/nidoca-core';
 
 @customElement('nidoca-i18n-selector')
-export class I18NSelectorComponent extends LitElement {
+export class NidocaI18NSelector extends LitElement {
 
    static EVENT_CHANGE_LANGUAGE: string =
       'nidoca-i18n-selector-change-language';
@@ -38,7 +38,7 @@ export class I18NSelectorComponent extends LitElement {
       I18nService.getUniqueInstance().setLanguage(this.langKey);
       BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
          this,
-         I18NSelectorComponent.EVENT_CHANGE_LANGUAGE,
+         NidocaI18NSelector.EVENT_CHANGE_LANGUAGE,
          this.langKey
       );
    }
