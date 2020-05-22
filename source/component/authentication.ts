@@ -8,7 +8,7 @@ import {
 import { BasicService, I18nService } from "@domoskanonos/frontend-basis";
 
 @customElement("nidoca-authentication")
-export default class NidocaAuthentication extends LitElement {
+export class NidocaAuthentication extends LitElement {
   static EVENT_AUTHENTICATION_LOGIN: string =
     "nidoca-event-authentication-event-login";
 
