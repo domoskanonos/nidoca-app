@@ -8,20 +8,21 @@
   ],
   "main": "lib/index.js",
   "devDependencies": {
+    "copyfiles": "^2.2.0",
     "@types/node": "latest",
     "prettier": "latest",
     "typescript": "next",
     "lit-element": "latest",
-    "@domoskanonos/frontend-basis": "^1.0.187",
-    "@domoskanonos/nidoca-core": "^1.0.428"
+    "@domoskanonos/frontend-basis": "latest",
+    "@domoskanonos/nidoca-core": "latest"
   },
   "dependencies": {},
   "author": "Dominik Bruhn",
   "scripts": {
-    "build_typescript": "tsc -p ./",
+    "copy-css": "copyfiles -u 1 ./source/**/*.css ./lib/",
+    "build_typescript": "npm run copy-css & tsc -p ./",
     "pretty": "prettier --write \"./**/*.{ts,json}\"",
-    "new-version": "npm version patch & npm publish --access=public",
-    "unpublish": "npm unpublish --force",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "new-version": "npm run build_typescript & npm version patch & npm publish --access=public",
+    "unpublish": "npm unpublish --force"
   }
 }
