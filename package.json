@@ -1,6 +1,6 @@
 {
   "name": "@domoskanonos/nidoca-app",
-  "version": "1.0.115",
+  "version": "1.0.116",
   "license": "MIT",
   "description": "nidoca framework (nidoca-app)",
   "main": "source/index.js",
