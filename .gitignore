@@ -106,3 +106,4 @@ dist
 *.js
 *.js.map
 /package-lock.json
+/lib/

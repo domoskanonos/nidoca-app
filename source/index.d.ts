@@ -1,2 +1,1 @@
-import "./index";
-export * from "./index";
+export { NidocaAuthentication } from "./component/authentication";

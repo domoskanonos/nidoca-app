@@ -4,6 +4,8 @@
     "target": "es5",
     /* Specify ECMAScript tasrget version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
     "module": "commonjs",
+    "declaration": true,/*Wenn Sie Pakete erstellen, sollte dies wahr sein. Typescript exportiert dann auch Typdefinitionen zusammen mit dem kompilierten Javascript-Code, sodass das Paket sowohl mit Typescript als auch mit Javascript verwendet werden kann. */
+    "outDir": "./lib",/*Das Javascript wird in den lib-Ordner kompiliert.*/
     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     "lib": [
       "es2015",
@@ -18,7 +20,6 @@
     "sourceMap": true,
     /* Generates corresponding '.map' file. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
-    "outDir": "./source",
     /* Redirect output structure to the directory. */
     "rootDir": "./source",
     /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
