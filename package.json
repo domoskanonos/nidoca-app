@@ -7,15 +7,14 @@
   "types": "source/index.d.ts",
   "module": "source/index.d.js",
   "devDependencies": {
-    "@types/node": "^12.12.14",
-    "prettier": "^2.0.5"
-  },
-  "dependencies": {
+    "@types/node": "latest",
+    "prettier": "latest",
     "typescript": "next",
     "lit-element": "latest",
     "@domoskanonos/frontend-basis": "latest",
     "@domoskanonos/nidoca-core": "latest"
   },
+  "dependencies": {},
   "author": "Dominik Bruhn",
   "scripts": {
     "build_typescript": "tsc -p ./",
