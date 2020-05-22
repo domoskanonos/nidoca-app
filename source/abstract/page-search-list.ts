@@ -7,7 +7,7 @@ import {
   TypographyType
 } from "@domoskanonos/nidoca-core";
 import { NidocaAbstractComponentSearchList } from "./component-search-list";
-import { BorderProperties } from "@domoskanonos/nidoca-core/source/index";
+import { BorderProperties } from "@domoskanonos/nidoca-core";
 
 export abstract class NidocaAbstractPageSearchList extends LitElement {
   @property()

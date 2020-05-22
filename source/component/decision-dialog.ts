@@ -2,7 +2,7 @@ import { customElement, html, LitElement, property } from "lit-element";
 import {
   FlexContainerProperties,
   FlexJustifyContent
-} from "@domoskanonos/nidoca-core/source/flex-container/component";
+} from "@domoskanonos/nidoca-core";
 import {
   SpacerAlignment,
   SpacerSize,
