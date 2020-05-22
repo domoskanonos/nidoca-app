@@ -6,7 +6,7 @@ import {
   NidocaTemplate,
   TypographyType
 } from "@domoskanonos/nidoca-core";
-import { NidocaAbstractComponentSearchList } from "./component-search-list";
+import { NidocaAbstractComponentSearchList } from "./nidoca-abstract-component-search-list";
 import { BorderProperties } from "@domoskanonos/nidoca-core";
 
 export abstract class NidocaAbstractPageSearchList extends LitElement {

@@ -8,7 +8,6 @@
   ],
   "main": "lib/index.js",
   "devDependencies": {
-    "copyfiles": "^2.2.0",
     "@types/node": "latest",
     "prettier": "latest",
     "typescript": "next",
@@ -19,8 +18,7 @@
   "dependencies": {},
   "author": "Dominik Bruhn",
   "scripts": {
-    "copy-css": "copyfiles -u 1 ./source/**/*.css ./lib/",
-    "build_typescript": "npm run copy-css & tsc -p ./",
+    "build_typescript": "tsc -p ./",
     "pretty": "prettier --write \"./**/*.{ts,json}\"",
     "new-version": "npm run build_typescript & npm version patch & npm publish --access=public",
     "unpublish": "npm unpublish --force"
