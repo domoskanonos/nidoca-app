@@ -1,2 +1,2 @@
-import './index';
-export * from './index';
+import "./index";
+export * from "./index";
