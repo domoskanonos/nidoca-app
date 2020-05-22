@@ -3,9 +3,10 @@
   "version": "1.0.121",
   "license": "MIT",
   "description": "nidoca framework (nidoca-app)",
+  "files": [
+    "lib/**/*"
+  ],
   "main": "source/index.js",
-  "types": "source/index.d.ts",
-  "module": "source/index.d.js",
   "devDependencies": {
     "@types/node": "latest",
     "prettier": "latest",
