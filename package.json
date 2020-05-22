@@ -6,7 +6,7 @@
   "files": [
     "lib/**/*"
   ],
-  "main": "source/index.js",
+  "main": "lib/index.js",
   "devDependencies": {
     "@types/node": "latest",
     "prettier": "latest",
