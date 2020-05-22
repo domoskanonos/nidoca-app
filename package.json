@@ -8,13 +8,14 @@
   "module": "source/index.d.js",
   "devDependencies": {
     "@types/node": "^12.12.14",
-    "prettier": "^2.0.5",
-    "typescript": "^3.9.3",
-    "lit-element": "^2.3.1",
-    "@domoskanonos/frontend-basis": "^1.0.177",
-    "@domoskanonos/nidoca-core": "^1.0.422"
+    "prettier": "^2.0.5"
   },
-  "dependencies": {},
+  "dependencies": {
+    "typescript": "next",
+    "lit-element": "latest",
+    "@domoskanonos/frontend-basis": "latest",
+    "@domoskanonos/nidoca-core": "latest"
+  },
   "author": "Dominik Bruhn",
   "scripts": {
     "build_typescript": "tsc -p ./",
