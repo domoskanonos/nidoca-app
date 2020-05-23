@@ -35,11 +35,6 @@ export class NidocaRegister extends LitElement {
 
    render() {
       return html`
-         <nidoca-typography .typographyType="${TypographyType.H4}"
-            >${I18nService.getUniqueInstance().getValue(
-               'nidoca-register-header'
-            )}</nidoca-typography
-         >
          <nidoca-form id="register-form">
             <nidoca-inputfield
                id="email"
