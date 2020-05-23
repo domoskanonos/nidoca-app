@@ -32,11 +32,6 @@ export class NidocaAuthentication extends LitElement {
     return !this.isAuthenticated
       ? html`
           <nidoca-form id="authenitcate-form">
-            <nidoca-typography .typographyType="${TypographyType.H4}"
-              >${I18nService.getUniqueInstance().getValue(
-                "component_authentication_header"
-              )}</nidoca-typography
-            >
             <nidoca-inputfield
               name="username"
               .inputfieldType="${InputfieldType.EMAIL}"
