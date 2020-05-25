@@ -54,16 +54,16 @@ export class NidocaRegisterOK extends LitElement {
               .spacerAlignment="${SpacerAlignment.VERTICAL}"
             >
               <nidoca-typography .typographyType="${TypographyType.H4}"
-                >${I18nService.getUniqueInstance().getValue('nidoca-ct-register-ok-header')}</nidoca-typography
+                >${I18nService.getUniqueInstance().getValue('nidoca-register-ok-header')}</nidoca-typography
               >
 
               <nidoca-typography .typographyType="${TypographyType.BODY1}"
-                >${I18nService.getUniqueInstance().getValue('nidoca-ct-register-ok-description')}</nidoca-typography
+                >${I18nService.getUniqueInstance().getValue('nidoca-register-ok-description')}</nidoca-typography
               >
             </nidoca-spacer>
 
             <nidoca-button
-              text="${I18nService.getUniqueInstance().getValue('nidoca-ct-register-ok-back-to-main-page-button')}"
+              text="${I18nService.getUniqueInstance().getValue('nidoca-register-ok-back-to-main-page-button')}"
               @click="${() => RouterService.getUniqueInstance().navigate('')}"
             ></nidoca-button>
           </nidoca-flex-container>
