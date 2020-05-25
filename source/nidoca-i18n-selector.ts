@@ -5,7 +5,6 @@ import { KeyValueData, InputfieldType } from "@domoskanonos/nidoca-core";
 
 @customElement("nidoca-i18n-selector")
 export class NidocaI18NSelector extends LitElement {
-  static EVENT_CHANGE_LANGUAGE: string = "nidoca-i18n-selector-change-language";
 
   @property()
   label: string = "";
@@ -32,11 +31,11 @@ export class NidocaI18NSelector extends LitElement {
   }
 
   private changeLanguage(event: CustomEvent) {
-    this.langKey = event.detail.outputData.value[0];
+    this.langKey = event.detail.outputData.value;
     I18nService.getUniqueInstance().setLanguage(this.langKey);
     BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
       this,
-      NidocaI18NSelector.EVENT_CHANGE_LANGUAGE,
+      "nidoca-event-i18n-selector-change-language",
       this.langKey
     );
   }
