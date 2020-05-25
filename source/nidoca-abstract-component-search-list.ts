@@ -1,19 +1,15 @@
-import { html, LitElement, property, query, TemplateResult } from "lit-element";
-import { repeat } from "lit-html/directives/repeat";
-import { guard } from "lit-html/directives/guard";
-import { RouterService, BasicService } from "@domoskanonos/frontend-basis";
-import {
-  KeyValueData,
-  NidocaList,
-  NidocaIcon
-} from "@domoskanonos/nidoca-core";
+import {html, LitElement, property, query, TemplateResult} from 'lit-element';
+import {repeat} from 'lit-html/directives/repeat';
+import {guard} from 'lit-html/directives/guard';
+import {RouterService, BasicService} from '@domoskanonos/frontend-basis';
+import {KeyValueData, NidocaList, NidocaIcon} from '@domoskanonos/nidoca-core';
 
 export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
   constructor() {
     super();
     this.search = BasicService.getUniqueInstance().getValue(
-      RouterService.getUniqueInstance().getStateProperty("search"),
-      ""
+      RouterService.getUniqueInstance().getStateProperty('search'),
+      ''
     );
   }
 
@@ -30,12 +26,12 @@ export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
   result: T[] = [];
 
   @property()
-  private search: string = "";
+  private search: string = '';
 
   @property()
   selectionMode: boolean = false;
 
-  @query("#listComponent")
+  @query('#listComponent')
   listComponent: NidocaList | undefined;
 
   protected firstUpdated(_changedProperties: Map<PropertyKey, unknown>): void {
@@ -50,10 +46,8 @@ export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
           this.resetSelection();
         }}"
         value="${this.search}"
-        @nidoca-event-inputfield-keyup="${(event: CustomEvent) =>
-          this.onKeyUp(event)}"
-        @nidoca-event-icon-clicked="${(event: CustomEvent) =>
-          this.iconClicked(event)}"
+        @nidoca-event-inputfield-keyup="${(event: CustomEvent) => this.onKeyUp(event)}"
+        @nidoca-event-icon-clicked="${(event: CustomEvent) => this.iconClicked(event)}"
       ></nidoca-search-bar>
       <nidoca-list id="listComponent">
         ${guard(
@@ -67,8 +61,7 @@ export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
                     <nidoca-list-item
                       index="${index}"
                       .selectMode="${this.selectionMode}"
-                      @nidoca-event-list-item-clicked="${() =>
-                        this.clicked(itemData, index)}"
+                      @nidoca-event-list-item-clicked="${() => this.clicked(itemData, index)}"
                       >${this.renderListItem(itemData)}</nidoca-list-item
                     >
                   `
@@ -87,19 +80,16 @@ export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
   }
 
   private runSearch(): void {
-    if (
-      this.search.length >= this.minCharacterSize ||
-      this.search.indexOf("*") > -1
-    ) {
-      if (this.search.indexOf("*") > -1) {
-        this.search = "";
+    if (this.search.length >= this.minCharacterSize || this.search.indexOf('*') > -1) {
+      if (this.search.indexOf('*') > -1) {
+        this.search = '';
       }
-      console.log("run search: %s", this.search);
-      this.executeSearch(this.search).then(result => {
+      console.log('run search: %s', this.search);
+      this.executeSearch(this.search).then((result) => {
         this.result = result;
         BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
           this,
-          "nidoca-event-search-list-run-search-successful"
+          'nidoca-event-search-list-run-search-successful'
         );
       });
     }
@@ -115,15 +105,15 @@ export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
 
   private clicked(itemData: T, index: number) {
     if (this.clickable && !this.selectionMode) {
-      console.debug("list item clicked.");
+      console.debug('list item clicked.');
       this.itemClicked(itemData, index);
     }
   }
 
   private iconClicked(event: CustomEvent) {
     let data: NidocaIcon = event.detail;
-    if (data.icon === "close") {
-      this.search = "";
+    if (data.icon === 'close') {
+      this.search = '';
       this.runSearch();
     }
   }
@@ -143,10 +133,10 @@ export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
       });
     }
     this.deleteItems(itemsToDelete).then(() => {
-      console.log("all items deleted.");
+      console.log('all items deleted.');
       BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
         this,
-        "nidoca-event-search-list-delete-items-successful"
+        'nidoca-event-search-list-delete-items-successful'
       );
     });
   }

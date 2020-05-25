@@ -1,13 +1,13 @@
-import { html, LitElement, query, TemplateResult, property } from "lit-element";
-import { RouterService } from "@domoskanonos/frontend-basis";
-import { NidocaForm } from "@domoskanonos/nidoca-core";
+import {html, LitElement, query, TemplateResult, property} from 'lit-element';
+import {RouterService} from '@domoskanonos/frontend-basis';
+import {NidocaForm} from '@domoskanonos/nidoca-core';
 
 export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
   constructor() {
     super();
-    this.identifier = RouterService.getUniqueInstance().getStateProperty("id");
+    this.identifier = RouterService.getUniqueInstance().getStateProperty('id');
     if (this.identifier != null) {
-      this.getItemById(this.identifier).then(item => {
+      this.getItemById(this.identifier).then((item) => {
         this.item = item;
         this.itemToProperties(this.item);
       });
@@ -21,7 +21,7 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
   @property()
   showDeleteDialog: boolean = false;
 
-  @query("#form")
+  @query('#form')
   formComponent: NidocaForm | undefined;
 
   render() {
@@ -30,10 +30,8 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
         ${this.renderFormFields()}
       </nidoca-form>
       <decision-dialog-component
-        @decision-dialog-component-ok-event="${() =>
-          this.deleteItemHideDialog()}"
-        @decision-dialog-component-cancel-event="${() =>
-          (this.showDeleteDialog = false)}"
+        @decision-dialog-component-ok-event="${() => this.deleteItemHideDialog()}"
+        @decision-dialog-component-cancel-event="${() => (this.showDeleteDialog = false)}"
         title="${this.getDialogDeleteTitle()}"
         description="${this.getDialogDeleteDescription()}"
         .showDialog="${this.showDeleteDialog}"
@@ -69,7 +67,7 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
   deleteItem() {
     if (this.identifier != null) {
       this.executeDelete(this.identifier).then(() => {
-        console.log("item deleted.");
+        console.log('item deleted.');
         RouterService.getUniqueInstance().back();
       });
     }
@@ -79,8 +77,8 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
     if (this.formComponent != null && this.formComponent.validate()) {
       this.item = this.formComponent.getOutputData().jsonObject;
       if (this.identifier != null) {
-        console.log("save item, identifier {}", this.identifier);
-        this.executeUpdate(this.identifier, this.item).then(item => {
+        console.log('save item, identifier {}', this.identifier);
+        this.executeUpdate(this.identifier, this.item).then((item) => {
           this.item = item;
           RouterService.getUniqueInstance().back();
         });
@@ -92,8 +90,8 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
     if (this.formComponent != null && this.formComponent.validate()) {
       this.item = this.formComponent.getOutputData().jsonObject;
       if (this.identifier == null) {
-        console.log("save item, identifier {}", this.identifier);
-        this.executeSave(this.item).then(item => {
+        console.log('save item, identifier {}', this.identifier);
+        this.executeSave(this.item).then((item) => {
           this.identifier = this.getIdentifier(item);
           this.item = item;
           RouterService.getUniqueInstance().back();

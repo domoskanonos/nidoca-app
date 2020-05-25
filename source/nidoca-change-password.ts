@@ -1,26 +1,22 @@
-import { customElement, html, LitElement, property, query } from "lit-element";
-import { BasicService, I18nService } from "@domoskanonos/frontend-basis";
-import {
-  NidocaForm,
-  TypographyType,
-  InputfieldType,
-} from "@domoskanonos/nidoca-core";
+import {customElement, html, LitElement, property, query} from 'lit-element';
+import {BasicService, I18nService} from '@domoskanonos/frontend-basis';
+import {NidocaForm, TypographyType, InputfieldType} from '@domoskanonos/nidoca-core';
 
-@customElement("nidoca-change-password")
+@customElement('nidoca-change-password')
 export class NidocaChangePassword extends LitElement {
   @property()
-  errorMessage: string = "";
+  errorMessage: string = '';
 
-  @query("#change-password-form")
+  @query('#change-password-form')
   formComponent: NidocaForm | undefined;
 
-  @query("#current-password-inputfield")
+  @query('#current-password-inputfield')
   currentPasswordInputField: HTMLInputElement | undefined;
 
-  @query("#new-password-inputfield")
+  @query('#new-password-inputfield')
   newPasswordInputField: HTMLInputElement | undefined;
 
-  @query("#repeat-new-password-inputfield")
+  @query('#repeat-new-password-inputfield')
   repeatNewPasswordInputField: HTMLInputElement | undefined;
 
   render() {
@@ -29,9 +25,7 @@ export class NidocaChangePassword extends LitElement {
         <nidoca-inputfield
           id="current-password-inputfield"
           .inputfieldType="${InputfieldType.PASSWORD}"
-          label="${I18nService.getUniqueInstance().getValue(
-            "nidoca-change-password-current-password-label"
-          )}"
+          label="${I18nService.getUniqueInstance().getValue('nidoca-change-password-current-password-label')}"
           trailingIcon="vpn_key"
           required="true"
           name="passwordCurrent"
@@ -39,9 +33,7 @@ export class NidocaChangePassword extends LitElement {
         <nidoca-inputfield
           id="new-password-inputfield"
           .inputfieldType="${InputfieldType.PASSWORD}"
-          label="${I18nService.getUniqueInstance().getValue(
-            "nidoca-change-password-new-password-label"
-          )}"
+          label="${I18nService.getUniqueInstance().getValue('nidoca-change-password-new-password-label')}"
           trailingIcon="vpn_key"
           minlength="8"
           required="true"
@@ -50,18 +42,14 @@ export class NidocaChangePassword extends LitElement {
         <nidoca-inputfield
           id="repeat-new-password-inputfield"
           .inputfieldType="${InputfieldType.PASSWORD}"
-          label="${I18nService.getUniqueInstance().getValue(
-            "nidoca-change-password-repeat-new-password-label"
-          )}"
+          label="${I18nService.getUniqueInstance().getValue('nidoca-change-password-repeat-new-password-label')}"
           trailingIcon="vpn_key"
           minlength="8"
           required="true"
           name="passwordNewRepeat"
         ></nidoca-inputfield>
         <nidoca-button
-          text="${I18nService.getUniqueInstance().getValue(
-            "nidoca-change-password-submit"
-          )}"
+          text="${I18nService.getUniqueInstance().getValue('nidoca-change-password-submit')}"
           @click="${() => this.changePassword()}"
         ></nidoca-button>
 
@@ -75,24 +63,17 @@ export class NidocaChangePassword extends LitElement {
   }
 
   private changePassword() {
-    this.errorMessage = "";
-    if (
-      this.newPasswordInputField?.value !=
-      this.repeatNewPasswordInputField?.value
-    ) {
+    this.errorMessage = '';
+    if (this.newPasswordInputField?.value != this.repeatNewPasswordInputField?.value) {
+      this.errorMessage = I18nService.getUniqueInstance().getValue('nidoca-change-password-error-samepasswordcheck');
+    } else if (this.currentPasswordInputField?.value == this.newPasswordInputField?.value) {
       this.errorMessage = I18nService.getUniqueInstance().getValue(
-        "nidoca-change-password-error-samepasswordcheck"
-      );
-    } else if (
-      this.currentPasswordInputField?.value == this.newPasswordInputField?.value
-    ) {
-      this.errorMessage = I18nService.getUniqueInstance().getValue(
-        "nidoca-change-password-error-samepasswordcheck-current-new"
+        'nidoca-change-password-error-samepasswordcheck-current-new'
       );
     } else if (this.formComponent != null && this.formComponent.isValid()) {
       BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
         this,
-        "nidoca-event-change-password",
+        'nidoca-event-change-password',
         this.formComponent.getOutputData()
       );
     }
