@@ -1,16 +1,14 @@
 import { customElement, html, LitElement, property, query } from "lit-element";
+import { BasicService, I18nService } from "@domoskanonos/frontend-basis";
 import {
   NidocaForm,
   TypographyType,
   InputfieldType,
   NidocaFormOutputData,
-} from "@domoskanonos/nidoca-core";
-import { BasicService, I18nService } from "@domoskanonos/frontend-basis";
-import {
   SpacerAlignment,
   SpacerSize,
   TargetType,
-} from "@domoskanonos/nidoca-core/lib";
+} from "@domoskanonos/nidoca-core";
 
 @customElement("nidoca-authentication")
 export class NidocaAuthentication extends LitElement {
