@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, query} from 'lit-element';
+import {customElement, html, LitElement, property, query} from 'lit-element';
 import {NidocaForm, InputfieldType} from '@domoskanonos/nidoca-core';
 import {BasicService, I18nService} from '@domoskanonos/frontend-basis';
 import {
@@ -13,10 +13,14 @@ import {
   SpacerSize,
   TransitionType,
   TypographyType,
+  VisibleType,
 } from '@domoskanonos/nidoca-core/lib';
 
 @customElement('nidoca-reset-password')
 export class NidocaResetPassword extends LitElement {
+  @property()
+  errorMessage: string = '';
+
   @query('#reset-password-form')
   formComponent: NidocaForm | undefined;
 
@@ -70,6 +74,19 @@ export class NidocaResetPassword extends LitElement {
               text="${I18nService.getUniqueInstance().getValue('nidoca-reset-password-submit')}"
               @click="${() => this.resetPassword()}"
             ></nidoca-button>
+            <nidoca-visible
+              slot="errorMessages"
+              visibleType="${BasicService.getUniqueInstance().isNotBlank(this.errorMessage)
+                ? VisibleType.NORMAL
+                : VisibleType.HIDE}"
+            >
+              <nidoca-spacer spacerSize="${SpacerSize.MEDIUM}" .spacerAlignment="${SpacerAlignment.VERTICAL}">
+                <nidoca-typography
+                  .typographyType="${TypographyType.OVERLINE}"
+                  text="${this.errorMessage}"
+                ></nidoca-typography>
+              </nidoca-spacer>
+            </nidoca-visible>
           </nidoca-form> </nidoca-flex-container></nidoca-grid-container
     ></nidoca-transition> `;
   }
