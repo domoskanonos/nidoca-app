@@ -10,7 +10,7 @@ and [litelement](https://lit-element.polymer-project.org/).
 visit showcase page: [nidoca.de](http://nidoca.de)
 
 this is an extension of nidoca-core.
-this project contains components an pages for mobile apps.
+this project contains components for mobile apps.
 
 ## Installation:
 
