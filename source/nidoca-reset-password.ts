@@ -15,7 +15,7 @@ export class NidocaResetPassword extends LitElement {
           label="${I18nService.getUniqueInstance().getValue(
             "nidoca-reset-password-email-label"
           )}"
-          trailingIcon="vpn_key"
+          trailingIcon="email"
           minlength="8"
           required="true"
           name="email"
