@@ -3,21 +3,26 @@ import {
   NidocaForm,
   TypographyType,
   InputfieldType,
-  NidocaFormOutputData
+  NidocaFormOutputData,
 } from "@domoskanonos/nidoca-core";
 import { BasicService, I18nService } from "@domoskanonos/frontend-basis";
+import {
+  SpacerAlignment,
+  SpacerSize,
+  TargetType,
+} from "@domoskanonos/nidoca-core/lib";
 
 @customElement("nidoca-authentication")
 export class NidocaAuthentication extends LitElement {
-  static EVENT_AUTHENTICATION_LOGIN: string =
-    "nidoca-event-authentication-event-login";
-
-  static EVENT_AUTHENTICATION_LOGOUT: string =
-    "nidoca-event-authentication-event-logout";
-
   constructor() {
     super();
   }
+
+  @property()
+  hrefResetPassword: string = "";
+
+  @property()
+  hrefRegister: string = "";
 
   @query("#authenitcate-form")
   formComponent: NidocaForm | undefined;
@@ -36,7 +41,7 @@ export class NidocaAuthentication extends LitElement {
               name="username"
               .inputfieldType="${InputfieldType.EMAIL}"
               label="${I18nService.getUniqueInstance().getValue(
-                "component_authentication_username"
+                "nidoca-authentication-username-label"
               )}"
               trailingIcon="account_circle"
               required="true"
@@ -44,7 +49,7 @@ export class NidocaAuthentication extends LitElement {
             <nidoca-inputfield
               .inputfieldType="${InputfieldType.PASSWORD}"
               label="${I18nService.getUniqueInstance().getValue(
-                "component_authentication_password"
+                "nidoca-authentication-password-label"
               )}"
               name="password"
               trailingIcon="vpn_key"
@@ -52,7 +57,7 @@ export class NidocaAuthentication extends LitElement {
             ></nidoca-inputfield>
             <nidoca-button
               text="${I18nService.getUniqueInstance().getValue(
-                "component_authentication_login"
+                "nidoca-authentication-login-button"
               )}"
               @nidoca-event-button-clicked="${() => this.login()}"
             ></nidoca-button>
@@ -63,39 +68,47 @@ export class NidocaAuthentication extends LitElement {
             ></nidoca-typography>
           </nidoca-form>
 
+          <nidoca-spacer
+            spacerSize="${SpacerSize.SMALL}"
+            .spacerAlignment="${SpacerAlignment.VERTICAL}"
+          >
+          </nidoca-spacer>
           <nidoca-typography
             .typographyType="${TypographyType.BODY1}"
             text="${I18nService.getUniqueInstance().getValue(
-              "component_authentication_password_lost"
+              "nidoca-authentication-password-lost-text"
             )}"
           ></nidoca-typography>
-          <nidoca-link href="#reset_password" target="_self"
+          <nidoca-link
+            href="${this.hrefResetPassword}"
+            .targetType="${TargetType.SELF}"
             >${I18nService.getUniqueInstance().getValue(
-              "component_authentication_password_lost_link"
+              "nidoca-authentication-password-lost-link"
             )}</nidoca-link
           >
+          <nidoca-spacer
+            spacerSize="${SpacerSize.SMALL}"
+            .spacerAlignment="${SpacerAlignment.VERTICAL}"
+          ></nidoca-spacer>
           <nidoca-typography
             .typographyType="${TypographyType.BODY1}"
             text="${I18nService.getUniqueInstance().getValue(
-              "component_authentication_register"
+              "nidoca-authentication-register-text"
             )}"
           ></nidoca-typography>
-          <nidoca-link href="#register" target="_self"
+          <nidoca-link
+            href="${this.hrefRegister}"
+            .targetType="${TargetType.SELF}"
             >${I18nService.getUniqueInstance().getValue(
-              "component_authentication_register_link"
+              "nidoca-authentication-register-link"
             )}</nidoca-link
           >
         `
       : html`
           <nidoca-form id="logout-form">
-            <nidoca-typography .typographyType="${TypographyType.H4}"
-              >${I18nService.getUniqueInstance().getValue(
-                "component_authentication_header_logout"
-              )}</nidoca-typography
-            >
             <nidoca-button
               text="${I18nService.getUniqueInstance().getValue(
-                "component_authentication_logout"
+                "nidoca-authentication-logout-button"
               )}"
               @click="${() => this.logout()}"
             ></nidoca-button>
@@ -107,8 +120,8 @@ export class NidocaAuthentication extends LitElement {
     if (this.formComponent != null && this.formComponent.validate()) {
       BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
         this,
-        NidocaAuthentication.EVENT_AUTHENTICATION_LOGIN,
-        this.getOutputData()
+        "nidoca-event-authentication-login",
+        this.formComponent.getOutputData()
       );
     }
   }
@@ -116,14 +129,7 @@ export class NidocaAuthentication extends LitElement {
   private logout() {
     BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
       this,
-      NidocaAuthentication.EVENT_AUTHENTICATION_LOGOUT,
-      this.getOutputData()
+      "nidoca-event-authentication-logout"
     );
-  }
-
-  getOutputData(): NidocaFormOutputData {
-    return this.formComponent != undefined
-      ? this.formComponent.getOutputData()
-      : NidocaFormOutputData.prototype;
   }
 }
