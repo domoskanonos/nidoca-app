@@ -14,9 +14,10 @@ import {
 
 @customElement("nidoca-authentication")
 export class NidocaAuthentication extends LitElement {
-  constructor() {
-    super();
-  }
+  @property()
+  username: string | null = localStorage.getItem(
+    "nidoca-local-storage-authentication-username-value"
+  );
 
   @property()
   hrefResetPassword: string = "";
@@ -40,6 +41,7 @@ export class NidocaAuthentication extends LitElement {
             <nidoca-inputfield
               name="username"
               .inputfieldType="${InputfieldType.EMAIL}"
+              .value="${this.username}"
               label="${I18nService.getUniqueInstance().getValue(
                 "nidoca-authentication-username-label"
               )}"
@@ -118,10 +120,15 @@ export class NidocaAuthentication extends LitElement {
 
   private login() {
     if (this.formComponent != null && this.formComponent.validate()) {
+      let outputData = <NidocaFormOutputData>this.formComponent.getOutputData();
       BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
         this,
         "nidoca-event-authentication-login",
-        this.formComponent.getOutputData()
+        outputData
+      );
+      localStorage.setItem(
+        "nidoca-local-storage-authentication-username-value",
+        outputData.jsonObject.username
       );
     }
   }
