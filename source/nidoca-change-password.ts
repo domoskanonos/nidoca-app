@@ -1,5 +1,4 @@
 import { customElement, html, LitElement, property, query } from "lit-element";
-
 import { BasicService, I18nService } from "@domoskanonos/frontend-basis";
 import {
   NidocaForm,
