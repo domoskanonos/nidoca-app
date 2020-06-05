@@ -1,8 +1,10 @@
 import {html, LitElement, query, TemplateResult, property} from 'lit-element';
 import {RouterService} from '@domoskanonos/frontend-basis';
 import {NidocaForm} from '@domoskanonos/nidoca-core';
+import {I18nService} from "@domoskanonos/frontend-basis/lib";
 
 export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
+
   constructor() {
     super();
     this.identifier = RouterService.getUniqueInstance().getStateProperty('id');
@@ -19,6 +21,12 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
   item: T = <T>{};
 
   @property()
+  dialogDeleteTitle: string = I18nService.getUniqueInstance().getValue("component_edit_dialog_delete_title");;
+
+  @property()
+  dialogDeleteDescription: string = I18nService.getUniqueInstance().getValue("component_edit_dialog_delete_description");;
+
+  @property()
   showDeleteDialog: boolean = false;
 
   @query('#form')
@@ -32,8 +40,8 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
       <decision-dialog-component
         @decision-dialog-component-ok-event="${() => this.deleteItemHideDialog()}"
         @decision-dialog-component-cancel-event="${() => (this.showDeleteDialog = false)}"
-        title="${this.getDialogDeleteTitle()}"
-        description="${this.getDialogDeleteDescription()}"
+        title="${this.dialogDeleteTitle}"
+        description="${this.dialogDeleteDescription}"
         .showDialog="${this.showDeleteDialog}"
       ></decision-dialog-component>
     `;
@@ -52,10 +60,6 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
   abstract itemToProperties(item: T): void;
 
   abstract getIdentifier(item: T): any;
-
-  abstract getDialogDeleteTitle(): string;
-
-  abstract getDialogDeleteDescription(): string;
 
   deleteItemHideDialog() {
     if (this.identifier != null) {
