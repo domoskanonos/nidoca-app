@@ -21,10 +21,10 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
   item: T = <T>{};
 
   @property()
-  dialogDeleteTitle: string = I18nService.getUniqueInstance().getValue("component_edit_dialog_delete_title");;
+  dialogDeleteTitle: string = I18nService.getUniqueInstance().getValue("component_edit_dialog_delete_title");
 
   @property()
-  dialogDeleteDescription: string = I18nService.getUniqueInstance().getValue("component_edit_dialog_delete_description");;
+  dialogDeleteDescription: string = I18nService.getUniqueInstance().getValue("component_edit_dialog_delete_description");
 
   @property()
   showDeleteDialog: boolean = false;
