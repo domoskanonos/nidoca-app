@@ -1,12 +1,12 @@
-import {html, LitElement, query, TemplateResult, property} from 'lit-element';
+import {html, LitElement, query, TemplateResult, property, PropertyValues} from 'lit-element';
 import {RouterService} from '@domoskanonos/frontend-basis';
 import {NidocaForm} from '@domoskanonos/nidoca-core';
-import {I18nService} from "@domoskanonos/frontend-basis/lib";
+import {I18nService} from '@domoskanonos/frontend-basis/lib';
 
 export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
 
-  constructor() {
-    super();
+  protected firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
     this.identifier = RouterService.getUniqueInstance().getStateProperty('id');
     if (this.identifier != null) {
       this.getItemById(this.identifier).then((item) => {
@@ -16,15 +16,16 @@ export abstract class NidocaAbstractComponentEdit<T> extends LitElement {
     }
   }
 
+
   identifier: any = null;
 
   item: T = <T>{};
 
   @property()
-  dialogDeleteTitle: string = I18nService.getUniqueInstance().getValue("component_edit_dialog_delete_title");
+  dialogDeleteTitle: string = I18nService.getUniqueInstance().getValue('component_edit_dialog_delete_title');
 
   @property()
-  dialogDeleteDescription: string = I18nService.getUniqueInstance().getValue("component_edit_dialog_delete_description");
+  dialogDeleteDescription: string = I18nService.getUniqueInstance().getValue('component_edit_dialog_delete_description');
 
   @property()
   showDeleteDialog: boolean = false;
