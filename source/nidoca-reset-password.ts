@@ -58,7 +58,7 @@ export class NidocaResetPassword extends LitElement {
             .spacerAlignment="${SpacerAlignment.VERTICAL}"
           >
             <nidoca-typography .typographyType="${TypographyType.H4}"
-              >${I18nService.getUniqueInstance().getValue('nidoca-reset-password_header')}</nidoca-typography
+              >${I18nService.getUniqueInstance().getValue('nidoca-reset-password-header')}</nidoca-typography
             >
           </nidoca-spacer>
           <nidoca-form id="reset-password-form">
