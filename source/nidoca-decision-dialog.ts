@@ -23,7 +23,7 @@ export class NidocaDecisionDialog extends LitElement {
           .borderSize="${BorderSize.MEDIUM}"
           .shadowType="${ShadowType.NONE}"
         >
-          <nidoca-box style="background-color: var(--app-color-background);" width="400px" height="200px">
+          <nidoca-box style="background-color: var(--app-color-background);" width="350px" height="200px">
             <nidoca-spacer .spacerSize="${SpacerSize.MEDIUM}" spacerAlignment="${SpacerAlignment.BOTH}">
               <nidoca-flex-container
                 .flexContainerProperties="${[FlexContainerProperties.CONTAINER_WIDTH_100]}"

@@ -9,4 +9,5 @@ export * from './nidoca-authentication';
 export * from './nidoca-register';
 export * from './nidoca-register-ok';
 export * from './nidoca-data-protection';
+export * from './nidoca-my-data';
 export * from './nidoca-decision-dialog';
