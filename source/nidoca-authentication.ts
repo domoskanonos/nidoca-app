@@ -42,10 +42,10 @@ export class NidocaAuthentication extends LitElement {
   errorMessage: string = '';
 
   render() {
-    return html`<nidoca-transition .transitionType="${TransitionType.CENTER}">
+    return html`
       <nidoca-grid-container
         .gridJustifyItems="${GridJustifyItems.CENTER}"
-        .gridAlignItems="${GridAlignItems.CENTER}"
+        .gridAlignItems="${GridAlignItems.START}"
         .gridTemplateRows="${['1fr']}"
         .gridTemplateColumns="${['1fr']}"
         height="100vh"
@@ -145,7 +145,7 @@ export class NidocaAuthentication extends LitElement {
               `}
         </nidoca-flex-container>
       </nidoca-grid-container>
-    </nidoca-transition>`;
+    `;
   }
 
   private login() {
