@@ -94,7 +94,7 @@ export class NidocaMyData extends LitElement {
               inputfieldMode="${InputfieldMode.CLEAN}"
               label="${I18nService.getUniqueInstance().getValue('nidoca-my-data-active-label')}"
               name="active"
-              value="${this.user?.active}"
+              checked="${this.user?.active}"
             ></nidoca-inputfield>
 
             <nidoca-inputfield
