@@ -121,6 +121,13 @@ export class NidocaMyData extends LitElement {
               value="${BasicService.getUniqueInstance().getValue(this.user?.city, '')}"
             ></nidoca-inputfield>
 
+            <nidoca-inputfield
+              .inputfieldType="${InputfieldType.HIDDEN}"
+              required="true"
+              name="id"
+              value="${this.user?.id}"
+            ></nidoca-inputfield>
+
             <nidoca-button
               text="${I18nService.getUniqueInstance().getValue('nidoca-my-data-submit')}"
               @click="${() => this.updateUser()}"
