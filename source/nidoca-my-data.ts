@@ -102,7 +102,7 @@ export class NidocaMyData extends LitElement {
               label="${I18nService.getUniqueInstance().getValue('nidoca-my-data-birthday-label')}"
               required="true"
               name="birthday"
-              value="${this.user?.birthday}"
+              .value="${this.user?.birthday}"
             ></nidoca-inputfield>
 
             <nidoca-inputfield
