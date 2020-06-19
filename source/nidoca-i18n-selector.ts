@@ -1,7 +1,8 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import {I18nService} from '@domoskanonos/frontend-basis';
 import {BasicService} from '@domoskanonos/frontend-basis';
-import {KeyValueData, InputfieldType} from '@domoskanonos/nidoca-core';
+import {InputfieldType} from '@domoskanonos/nidoca-core';
+import {KeyValuePair} from "@domoskanonos/frontend-basis/lib";
 
 @customElement('nidoca-i18n-selector')
 export class NidocaI18NSelector extends LitElement {
@@ -12,7 +13,7 @@ export class NidocaI18NSelector extends LitElement {
   langKey: string = I18nService.getUniqueInstance().getLanguage();
 
   @property()
-  languages: KeyValueData[] = [];
+  languages: KeyValuePair[] = [];
 
   render() {
     return html`

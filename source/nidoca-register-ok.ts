@@ -1,7 +1,5 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import {I18nService} from '@domoskanonos/frontend-basis';
-import {BasicService} from '@domoskanonos/frontend-basis';
-import {KeyValueData, InputfieldType} from '@domoskanonos/nidoca-core';
 import {RouterService} from '@domoskanonos/frontend-basis/lib';
 import {
   FlexAlignItems,
@@ -13,7 +11,6 @@ import {
   GridJustifyItems,
   SpacerAlignment,
   SpacerSize,
-  TransitionType,
   TypographyType,
 } from '@domoskanonos/nidoca-core/lib';
 
