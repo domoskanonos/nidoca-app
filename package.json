@@ -15,7 +15,9 @@
     "@domoskanonos/frontend-basis": "latest",
     "@domoskanonos/nidoca-core": "latest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@zxing/library": "^0.17.0"
+  },
   "author": "Dominik Bruhn",
   "scripts": {
     "build_typescript": "tsc -p ./",
