@@ -27,7 +27,7 @@ export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
   result: T[] = [];
 
   @property()
-  private search: string = '';
+  search: string = '';
 
   @property()
   selectionMode: boolean = false;
