@@ -1,6 +1,6 @@
 {
   "name": "@domoskanonos/nidoca-app",
-  "version": "1.0.156",
+  "version": "1.0.163",
   "license": "MIT",
   "description": "nidoca framework (nidoca-app)",
   "files": [
@@ -15,7 +15,9 @@
     "@domoskanonos/frontend-basis": "latest",
     "@domoskanonos/nidoca-core": "latest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@zxing/library": "^0.17.0"
+  },
   "author": "Dominik Bruhn",
   "scripts": {
     "build_typescript": "tsc -p ./",

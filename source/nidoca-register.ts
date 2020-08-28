@@ -41,10 +41,10 @@ export class NidocaRegister extends LitElement {
   formComponent: NidocaForm | undefined;
 
   render() {
-    return html`<nidoca-transition .transitionType="${TransitionType.CENTER}">
+    return html`
       <nidoca-grid-container
         .gridJustifyItems="${GridJustifyItems.CENTER}"
-        .gridAlignItems="${GridAlignItems.CENTER}"
+        .gridAlignItems="${GridAlignItems.START}"
         .gridTemplateRows="${['1fr']}"
         .gridTemplateColumns="${['1fr']}"
         height="100vh"
@@ -149,7 +149,7 @@ export class NidocaRegister extends LitElement {
           </nidoca-spacer></nidoca-flex-container
         >
       </nidoca-grid-container>
-    </nidoca-transition> `;
+    `;
   }
 
   private register() {

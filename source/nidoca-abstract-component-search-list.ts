@@ -2,14 +2,15 @@ import {html, LitElement, property, query, TemplateResult} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
 import {guard} from 'lit-html/directives/guard';
 import {RouterService, BasicService} from '@domoskanonos/frontend-basis';
-import {KeyValueData, NidocaList, NidocaIcon} from '@domoskanonos/nidoca-core';
+import {NidocaList, NidocaIcon} from '@domoskanonos/nidoca-core';
+import {KeyValuePair} from "@domoskanonos/frontend-basis/lib";
 
 export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
   constructor() {
     super();
     this.search = BasicService.getUniqueInstance().getValue(
-      RouterService.getUniqueInstance().getStateProperty('search'),
-      ''
+        RouterService.getUniqueInstance().getStateProperty('search'),
+        ''
     );
   }
 
@@ -26,7 +27,7 @@ export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
   result: T[] = [];
 
   @property()
-  private search: string = '';
+  search: string = '';
 
   @property()
   selectionMode: boolean = false;
@@ -74,7 +75,7 @@ export abstract class NidocaAbstractComponentSearchList<T> extends LitElement {
   }
 
   async onKeyUp(event: CustomEvent): Promise<void> {
-    let data: KeyValueData = event.detail;
+    let data: KeyValuePair = event.detail;
     this.search = data.value;
     this.runSearch();
   }
