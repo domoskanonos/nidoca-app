@@ -10,6 +10,7 @@ export * from './nidoca-register';
 export * from './nidoca-register-ok';
 export * from './nidoca-data-protection';
 export * from './nidoca-my-data';
+export * from './nidoca-icon-action';
 export * from './nidoca-decision-dialog';
 export * from './nidoca-barcode';
 export * from './nidoca-complex-table';
