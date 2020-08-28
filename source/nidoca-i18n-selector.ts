@@ -29,7 +29,7 @@ export class NidocaI18NSelector extends LitElement {
   }
 
   private changeLanguage(event: CustomEvent) {
-    this.langKey = event.detail.outputData.value;
+    this.langKey = event.detail.value;
     I18nService.getUniqueInstance().setLanguage(this.langKey);
     BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
       this,
