@@ -47,7 +47,7 @@ export class NidocaRegister extends LitElement {
         .gridAlignItems="${GridAlignItems.START}"
         .gridTemplateRows="${['1fr']}"
         .gridTemplateColumns="${['1fr']}"
-        height="100vh"
+        height="100%"
       >
         <nidoca-flex-container
           style="width: 400px;"
