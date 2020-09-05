@@ -49,8 +49,8 @@ export class NidocaChangePassword extends LitElement {
         flexItemBasisValue="auto"
         .flexDirection="${FlexDirection.COLUMN}"
         .flexWrap="${FlexWrap.NO_WRAP}"
-        .flexJustifyContent="${FlexJustifyContent.SPACE_AROUND}"
-        .flexAlignItems="${FlexAlignItems.STRETCH}"
+        .flexJustifyContent="${FlexJustifyContent.CENTER}"
+        .flexAlignItems="${FlexAlignItems.CENTER}"
       >
         <nidoca-icon
           color="var(--app-color-primary-background)"
