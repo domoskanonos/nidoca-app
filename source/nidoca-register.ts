@@ -18,6 +18,7 @@ import {
   GridAlignItems,
   GridJustifyItems,
   TransitionType,
+  NidocaCaptcha,
 } from '@domoskanonos/nidoca-core';
 
 @customElement('nidoca-register')
@@ -29,6 +30,9 @@ export class NidocaRegister extends LitElement {
   hrefTermsOfUse: string = '';
 
   @property()
+  hrefPrivacy: string = '';
+
+  @property()
   hrefLogin: string = '';
 
   @query('#email')
@@ -36,6 +40,9 @@ export class NidocaRegister extends LitElement {
 
   @query('#repeat-email')
   repeatEmailInputField: HTMLInputElement | undefined;
+
+  @query('#captcha')
+  captcha: NidocaCaptcha | undefined;
 
   @query('#register-form')
   formComponent: NidocaForm | undefined;
@@ -102,6 +109,16 @@ export class NidocaRegister extends LitElement {
               minlength="8"
               required="true"
             ></nidoca-inputfield>
+            <nidoca-captcha-component id="captcha"></nidoca-captcha-component>
+            <nidoca-typography
+              .typographyType="${TypographyType.BODY1}"
+              .typographyAlignment="${TypographyAlignment.LEFT}"
+            >
+              ${I18nService.getUniqueInstance().getValue('nidoca-register-privacy-text')}
+              <nidoca-link href="${this.hrefPrivacy}" .targetType="${TargetType.BLANK}"
+                >${I18nService.getUniqueInstance().getValue('nidoca-register-privacy-link')}</nidoca-link
+              >
+            </nidoca-typography>
             <nidoca-inputfield
               .inputfieldMode="${InputfieldMode.CLEAN}"
               .inputfieldType="${InputfieldType.SWITCH}"
@@ -156,7 +173,7 @@ export class NidocaRegister extends LitElement {
     this.errorMessage = '';
     if (this.emailInputField?.value != this.repeatEmailInputField?.value) {
       this.errorMessage = I18nService.getUniqueInstance().getValue('nidoca-register-error-same-email-check');
-    } else if (this.formComponent?.validate()) {
+    } else if (this.formComponent?.validate() && this.captcha?.isValid()) {
       BasicService.getUniqueInstance().dispatchSimpleCustomEvent(
         this,
         'nidoca-event-register-submit',
