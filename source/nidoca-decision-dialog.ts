@@ -15,6 +15,12 @@ export class NidocaDecisionDialog extends LitElement {
   @property()
   description: string = '';
 
+  @property()
+  textOkButton: string = I18nService.getUniqueInstance().getValue('yes');
+
+  @property()
+  textCancelButton: string = I18nService.getUniqueInstance().getValue('no');
+
   render() {
     return html`
       <nidoca-dialog .show="${this.showDialog}">
@@ -46,7 +52,7 @@ export class NidocaDecisionDialog extends LitElement {
                   <nidoca-spacer .spacerSize="${SpacerSize.MEDIUM}" spacerAlignment="${SpacerAlignment.HORIZONTAL}">
                     <nidoca-link
                       @click="${() => this.dispatchOkEvent()}"
-                      text="${I18nService.getUniqueInstance().getValue('yes')}"
+                      text="${this.textOkButton}"
                     ></nidoca-link>
                   </nidoca-spacer>
                   <nidoca-spacer .spacerSize="${SpacerSize.MEDIUM}" spacerAlignment="${SpacerAlignment.HORIZONTAL}">
@@ -54,7 +60,7 @@ export class NidocaDecisionDialog extends LitElement {
                       @click="${() => {
                         this.dispatchCancelEvent();
                       }}"
-                      text="${I18nService.getUniqueInstance().getValue('no')}"
+                      text="${this.textCancelButton}"
                     ></nidoca-link>
                   </nidoca-spacer>
                 </nidoca-flex-container>
