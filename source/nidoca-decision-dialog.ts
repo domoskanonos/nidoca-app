@@ -42,6 +42,7 @@ export class NidocaDecisionDialog extends LitElement {
                   .typographyType="${TypographyType.BODY1}"
                   text="${this.description}"
                 ></nidoca-typography>
+                <slot></slot>
                 <nidoca-spacer .spacerSize="${SpacerSize.MEDIUM}" spacerAlignment="${SpacerAlignment.VERTICAL}">
                 </nidoca-spacer>
                 <nidoca-flex-container
@@ -50,10 +51,7 @@ export class NidocaDecisionDialog extends LitElement {
                   itemFlexBasisValue="auto"
                 >
                   <nidoca-spacer .spacerSize="${SpacerSize.MEDIUM}" spacerAlignment="${SpacerAlignment.HORIZONTAL}">
-                    <nidoca-link
-                      @click="${() => this.dispatchOkEvent()}"
-                      text="${this.textOkButton}"
-                    ></nidoca-link>
+                    <nidoca-link @click="${() => this.dispatchOkEvent()}" text="${this.textOkButton}"></nidoca-link>
                   </nidoca-spacer>
                   <nidoca-spacer .spacerSize="${SpacerSize.MEDIUM}" spacerAlignment="${SpacerAlignment.HORIZONTAL}">
                     <nidoca-link
