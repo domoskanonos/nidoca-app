@@ -167,12 +167,12 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
   private renderHeader(): TemplateResult {
     return html`
       ${guard(
-      [this.rows],
-      () =>
-        html`
+        [this.rows],
+        () =>
+          html`
             ${repeat(
-          this.keys,
-          key => html`
+              this.keys,
+              (key) => html`
                 <nidoca-grid-container
                   height="100%"
                   class="header"
@@ -187,20 +187,20 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
                   >
                   <nidoca-icon
                     icon="${this.getSortValue(key).value == ''
-            ? 'remove'
-            : this.getSortValue(key).value == ':asc;'
-              ? 'keyboard_arrow_up'
-              : 'keyboard_arrow_down'}"
+                      ? 'remove'
+                      : this.getSortValue(key).value == ':asc;'
+                      ? 'keyboard_arrow_up'
+                      : 'keyboard_arrow_down'}"
                     @nidoca-event-icon-clicked="${() => {
-            this.updateSortValue(key);
-          }}"
+                      this.updateSortValue(key);
+                    }}"
                     clickable="true"
                   ></nidoca-icon>
                 </nidoca-grid-container>
-              `,
-        )}
-          `,
-    )}
+              `
+            )}
+          `
+      )}
     `;
   }
 
@@ -209,27 +209,27 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
       <nidoca-form
         .formProperties="${[FormProperties.ROW_LAYOUT]}"
         @nidoca-event-inputfield-keyup="${(event: CustomEvent) => {
-      this.updateSearchValue(event);
-    }}"
+          this.updateSearchValue(event);
+        }}"
         @nidoca-event-inputfield-change="${(event: CustomEvent) => {
-      this.updateSearchValue(event);
-    }}"
+          this.updateSearchValue(event);
+        }}"
       >
         ${guard(
-      [this.keys],
-      () =>
-        html`
+          [this.keys],
+          () =>
+            html`
               ${repeat(
-          this.keys,
-          key => html`
+                this.keys,
+                (key) => html`
                 <nidoca-grid-container .gridTemplateRows="${['1fr']}"
                   .gridTemplateColumns="${['1fr', 'min-content']}">
                   ${this.renderSearchColumn(key)}
                   <nidoca-spacer spacerSize="${SpacerSize.MEDIUM}" spacerAlignment="${SpacerAlignment.BOTH}">
-                </nidoca-grid-container>`,
+                </nidoca-grid-container>`
+              )}
+            `
         )}
-            `,
-    )}
       </nidoca-form>
     `;
   }
@@ -237,25 +237,25 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
   private renderRows(): TemplateResult {
     return html`
       ${guard(
-      [this.rows],
-      () =>
-        html`
+        [this.rows],
+        () =>
+          html`
             ${repeat(
-          this.rows,
-          (row: ComplexTableRow, rowIndex: number) => html`
+              this.rows,
+              (row: ComplexTableRow, rowIndex: number) => html`
                 ${guard(
-            row.rowModel,
-            () =>
-              html`
+                  row.rowModel,
+                  () =>
+                    html`
                       ${repeat(
-                row.rowModel,
-                (column, columnIndex) => html`
+                        row.rowModel,
+                        (column, columnIndex) => html`
                           <nidoca-grid-container
                             height="100%"
                             class="column${rowIndex % 2 == 0 ? ' odd' : ' even'}"
                             @click="${() => {
-                  this.columnClicked(rowIndex, columnIndex);
-                }}"
+                              this.columnClicked(rowIndex, columnIndex);
+                            }}"
                             .gridJustifyItems="${GridJustifyItems.START}"
                             .gridAlignItems="${GridAlignItems.CENTER}"
                             .gridTemplateRows="${['1fr']}"
@@ -263,14 +263,14 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
                           >
                             ${column}
                           </nidoca-grid-container>
-                        `,
-              )}
-                    `,
-          )}
-              `,
-        )}
-          `,
-    )}
+                        `
+                      )}
+                    `
+                )}
+              `
+            )}
+          `
+      )}
     `;
   }
 
@@ -287,32 +287,32 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
             .gridAlignItems="${GridAlignItems.CENTER}"
             .gridTemplateRows="${['auto']}"
             .gridTemplateColumns="${[
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-      'auto',
-    ]}"
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+              'auto',
+            ]}"
           >
             <nidoca-icon
               title="${I18nService.getUniqueInstance().getValue('nidoca-complex-table-first-page')}"
               icon="first_page"
               clickable="true"
               @nidoca-event-icon-clicked="${() => {
-      this.page = 0;
-      this.search();
-    }}"
+                this.page = 0;
+                this.search();
+              }}"
               ;
             ></nidoca-icon>
             <nidoca-border
@@ -325,18 +325,18 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
                 icon="navigate_before"
                 clickable="true"
                 @nidoca-event-icon-clicked="${() => {
-      this.previousPage();
-    }}"
+                  this.previousPage();
+                }}"
                 ;
               ></nidoca-icon
             ></nidoca-border>
             ${repeat(
-      this.selectablePages,
-      selectablePage => html`
+              this.selectablePages,
+              (selectablePage) => html`
                 <nidoca-border
                   style="${this.page == selectablePage
-        ? 'background-color: var(--app-color-surface-background-light);'
-        : ''}"
+                    ? 'background-color: var(--app-color-surface-background-light);'
+                    : ''}"
                   .borderProperties="${[BorderProperties.LEFT]}"
                   .borderSize="${BorderSize.THIN}"
                   .shadowType="${ShadowType.NONE}"
@@ -344,14 +344,14 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
                   <nidoca-icon
                     .clickable="${selectablePage > -1}"
                     @nidoca-event-icon-clicked="${() => {
-        this.page = selectablePage;
-        this.search();
-      }}"
+                      this.page = selectablePage;
+                      this.search();
+                    }}"
                     >${selectablePage + 1}</nidoca-icon
                   ></nidoca-border
                 >
-              `,
-    )}
+              `
+            )}
 
             <nidoca-border
               .borderProperties="${[BorderProperties.LEFT]}"
@@ -370,8 +370,8 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
                 icon="navigate_next"
                 clickable="true"
                 @nidoca-event-icon-clicked="${() => {
-      this.nextPage();
-    }}"
+                  this.nextPage();
+                }}"
                 ;
               ></nidoca-icon></nidoca-border
             ><nidoca-border
@@ -384,9 +384,9 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
                 icon="last_page"
                 clickable="true"
                 @nidoca-event-icon-clicked="${() => {
-      this.page = this.totalPages - 1;
-      this.search();
-    }}"
+                  this.page = this.totalPages - 1;
+                  this.search();
+                }}"
                 ;
               ></nidoca-icon
             ></nidoca-border> </nidoca-grid-container
@@ -437,19 +437,15 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
       let value: any = model[keyValuePair.key];
       switch (typescriptType) {
         case TypescriptType.BOOLEAN:
-          rowModel.push(
-            html`
-              <nidoca-icon icon="${value ? 'done' : 'clear'}"></nidoca-icon>
-            `,
-          );
+          rowModel.push(html` <nidoca-icon icon="${value ? 'done' : 'clear'}"></nidoca-icon> `);
           break;
         case TypescriptType.ENUM:
           rowModel.push(
             html`
-               <nidoca-typography .typographyType="${TypographyType.BODY2}"
-                  >${I18nService.getUniqueInstance().getValue('enum_'.concat(value))}</nidoca-typography
-                >
-            `,
+              <nidoca-typography .typographyType="${TypographyType.BODY2}"
+                >${I18nService.getUniqueInstance().getValue('enum_'.concat(value))}</nidoca-typography
+              >
+            `
           );
           break;
         default:
@@ -460,7 +456,7 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
                   >${BasicService.getUniqueInstance().beautifyText(value)}</nidoca-typography
                 ></nidoca-spacer
               >
-            `,
+            `
           );
           break;
       }
@@ -520,7 +516,7 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
     console.log('column clicked, row: %s, column: %s ', rowIndex, columnIndex);
     BasicService.getUniqueInstance().dispatchSimpleCustomEvent(this, 'nidoca-event-complex-table-column-clicked', <
       NidocaEventComplexTableRow
-      >{
+    >{
       columnIndex: columnIndex,
       rowIndex: rowIndex,
       row: this.rows[rowIndex],
@@ -575,7 +571,7 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
 
   private getSearchQueryString() {
     let whereClause = '';
-    this.searchValues.forEach(searchValue => {
+    this.searchValues.forEach((searchValue) => {
       if (BasicService.getUniqueInstance().isNotBlank(searchValue.value)) {
         whereClause = whereClause
           .concat(searchValue.key)
@@ -621,7 +617,7 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
 
   private getSortQueryString(): string {
     let sortQueryString: string = '';
-    this.sortValues.forEach(sortValue => {
+    this.sortValues.forEach((sortValue) => {
       if (BasicService.getUniqueInstance().isNotBlank(sortValue.value)) {
         sortQueryString = sortQueryString.concat(sortValue.key).concat(sortValue.value);
       }
@@ -655,8 +651,8 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
             <nidoca-inputfield
               .value="${new Date()}"
               label="${I18nService.getUniqueInstance().getValue(
-          this.getI18nPrefix().concat(key),
-        )} ${I18nService.getUniqueInstance().getValue('from')}"
+                this.getI18nPrefix().concat(key)
+              )} ${I18nService.getUniqueInstance().getValue('from')}"
               .inputfieldType="${InputfieldType.DATE}"
               .inputfieldMode="${InputfieldMode.FILLED}"
               name="firstDate"
@@ -665,8 +661,8 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
             <nidoca-inputfield
               .value="${new Date()}"
               label="${I18nService.getUniqueInstance().getValue(
-          this.getI18nPrefix().concat(key),
-        )} ${I18nService.getUniqueInstance().getValue('to')}"
+                this.getI18nPrefix().concat(key)
+              )} ${I18nService.getUniqueInstance().getValue('to')}"
               .inputfieldType="${InputfieldType.DATE}"
               .inputfieldMode="${InputfieldMode.FILLED}"
               name="secondDate"
@@ -682,19 +678,19 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
             name="${key}"
             .value="${this.getSearchValue(key).value}"
             .options="${[
-          <KeyValuePair>{
-            key: '',
-            value: I18nService.getUniqueInstance().getValue('all'),
-          },
-          <KeyValuePair>{
-            key: 'true',
-            value: I18nService.getUniqueInstance().getValue('yes'),
-          },
-          <KeyValuePair>{
-            key: 'false',
-            value: I18nService.getUniqueInstance().getValue('no'),
-          },
-        ]}"
+              <KeyValuePair>{
+                key: '',
+                value: I18nService.getUniqueInstance().getValue('all'),
+              },
+              <KeyValuePair>{
+                key: 'true',
+                value: I18nService.getUniqueInstance().getValue('yes'),
+              },
+              <KeyValuePair>{
+                key: 'false',
+                value: I18nService.getUniqueInstance().getValue('no'),
+              },
+            ]}"
           ></nidoca-inputfield>
         `;
       default:
