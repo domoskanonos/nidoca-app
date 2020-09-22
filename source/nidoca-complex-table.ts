@@ -636,11 +636,11 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
   }
 
   public getInputfieldType(propertyName: string): InputfieldType {
-    return NidocaInputfield.inputfieldTypeByTypescriptType(this.getSearchPropertyTypes().getItem(propertyName)?.value);
+    return NidocaInputfield.inputfieldTypeByTypescriptType(this.getPropertyTypes().getItem(propertyName)?.value);
   }
 
   private renderSearchColumn(key: string) {
-    let typescriptType: TypescriptType = this.getPropertyTypes().getItem(key)?.value;
+    let typescriptType: TypescriptType = this.getSearchPropertyTypes().getItem(key)?.value;
     switch (typescriptType) {
       case TypescriptType.DATE:
         return html`
