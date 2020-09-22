@@ -443,6 +443,15 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
             `,
           );
           break;
+        case TypescriptType.ENUM:
+          rowModel.push(
+            html`
+               <nidoca-typography .typographyType="${TypographyType.BODY2}"
+                  >${I18nService.getUniqueInstance().getValue('enum_'.concat(value))}</nidoca-typography
+                >
+            `,
+          );
+          break;
         default:
           rowModel.push(
             html`
