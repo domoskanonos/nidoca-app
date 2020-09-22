@@ -583,15 +583,15 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
     let whereClause = '';
     this.searchValues.forEach((searchValue) => {
       if (BasicService.getUniqueInstance().isNotBlank(searchValue.value)) {
-        whereClause = whereClause
+        whereClause = whereClause.concat("&")
           .concat(searchValue.key)
           .concat('=')
           .concat(BasicService.getUniqueInstance().getValue(searchValue.value, ''));
       }
     });
-    if (whereClause.length > 0) {
-      whereClause = '&'.concat(whereClause);
-    }
+    //if (whereClause.length > 0) {
+      //whereClause = '&'.concat(whereClause);
+    //}
     return whereClause;
   }
 
