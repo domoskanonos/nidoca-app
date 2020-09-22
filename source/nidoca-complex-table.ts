@@ -94,6 +94,9 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
   keys: string[];
 
   @property()
+  searchKeys: string[];
+
+  @property()
   page: number = 0;
 
   @property()
@@ -127,6 +130,7 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
   constructor() {
     super();
     this.keys = this.getPropertyKeys();
+    this.searchKeys = this.getSearchPropertyKeys();
   }
 
   abstract getRemoteRepository(): BasicRemoteRepository<T, S>;
@@ -139,6 +143,10 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
 
   private getPropertyKeys(): string[] {
     return this.getPropertyTypes().getKeys();
+  }
+
+  private getSearchPropertyKeys(): string[] {
+    return this.getSearchPropertyTypes().getKeys();
   }
 
   render() {
@@ -218,11 +226,11 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
         }}"
       >
         ${guard(
-          [this.keys],
+          [this.searchKeys],
           () =>
             html`
               ${repeat(
-                this.keys,
+                this.searchKeys,
                 (key) => html`
                 <nidoca-grid-container .gridTemplateRows="${['1fr']}"
                   .gridTemplateColumns="${['1fr', 'min-content']}">
