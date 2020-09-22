@@ -135,6 +135,8 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
 
   abstract getPropertyTypes(): KeyValuePairs;
 
+  abstract getSearchPropertyTypes(): KeyValuePairs;
+
   private getPropertyKeys(): string[] {
     return this.getPropertyTypes().getKeys();
   }
@@ -634,7 +636,7 @@ export abstract class NidocaComplexTable<T extends Object, S extends Object> ext
   }
 
   public getInputfieldType(propertyName: string): InputfieldType {
-    return NidocaInputfield.inputfieldTypeByTypescriptType(this.getPropertyTypes().getItem(propertyName)?.value);
+    return NidocaInputfield.inputfieldTypeByTypescriptType(this.getSearchPropertyTypes().getItem(propertyName)?.value);
   }
 
   private renderSearchColumn(key: string) {
